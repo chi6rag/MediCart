@@ -7,8 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<div class="wrapper">
+	<div class="header">
+		<h1 style="font-family: Comfortaa, sans-serif">medicart</h1>
+		<p>Your Online Grocery</p>
+	</div>
+	<p style="color: green"><%= flash[:notice] %></p>
+	<div class="sidebar">
+		(sidebar)
+	</div>
+	<div class="main">
+		<%= yield %>
+	</div>
+	<div class="footer">
+		Medicart
+	</div>
+</div><!-- /wrapper -->
 </body>
 </html>
