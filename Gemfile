@@ -6,8 +6,6 @@ gem 'sass-rails', '~> 5.0'
 # new gems
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
-gem 'haml'
-gem 'haml-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'puma'
@@ -28,7 +26,6 @@ group :test do
 end
 
 group :development do
-	gem 'html2haml'
 	gem 'guard-livereload'
 end
 
