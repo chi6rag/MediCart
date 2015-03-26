@@ -13,7 +13,7 @@ class OrderItemsController < ApplicationController
 
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to @order, notice: 'Order item was successfully created.' }
+        format.html { redirect_to @order, notice: 'Successfully added the product to cart' }
         format.json { render :show, status: :created, location: @order_item }
       else
         format.html { render :new }
@@ -58,10 +58,12 @@ class OrderItemsController < ApplicationController
     end
 
     def load_order
-        @order = Order.find_or_initialize_by_id(session[:order_id], status: "unsubmitted")
-        if @order.new_record?
-          @order.save!
-          session[:order_id] = @order.id
-        end
+      @order = Order.find_or_initialize_by(id: session[:order_id])
+      if @order.new_record?
+        @order.status = "unsubmitted"
+        @order.save!
+        session[:order_id] = @order.id
+      end
     end
+
 end
