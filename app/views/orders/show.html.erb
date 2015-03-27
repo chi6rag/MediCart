@@ -25,7 +25,7 @@
   <tr>
   	<td><%= image_tag order_item.product.image_url, height: '150px' %></td>
   	<td><%= order_item.product.title %></td>
-  	<td><%= order_item.quantity %></td>
+  	<td><%= link_to "#{order_item.quantity} (edit)", edit_order_item_path(order_item) %></td>
   	<td><%= order_item.product.price %></td>
   	<td><%= order_item.subtotal %></td>
   	<td><%= link_to "Remove", order_item_path(order_item), method: :delete, class: 'btn btn-danger' %></td>
@@ -39,4 +39,3 @@
 </table>
 <br />
 <%= link_to "Empty Cart", order_path(@order), class: 'btn btn-primary', method: :delete %>
-  		

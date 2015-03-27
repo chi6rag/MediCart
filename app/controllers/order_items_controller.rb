@@ -9,7 +9,8 @@ class OrderItemsController < ApplicationController
   # POST /order_items
   # POST /order_items.json
   def create
-    @order_item = @order.order_items.new(product_id: params[:product_id], quantity: 1)
+    @order_item = @order.order_items.find_or_initialize_by(product_id: params[:product_id])
+    @order_item.quantity +=1
 
     respond_to do |format|
       if @order_item.save
@@ -27,7 +28,7 @@ class OrderItemsController < ApplicationController
   def update
     respond_to do |format|
       if @order_item.update(order_item_params)
-        format.html { redirect_to @order_item, notice: 'Order item was successfully updated.' }
+        format.html { redirect_to @order_item.order, notice: 'Successfully updated.' }
         format.json { render :show, status: :ok, location: @order_item }
       else
         format.html { render :edit }
