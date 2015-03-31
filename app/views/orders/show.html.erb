@@ -37,7 +37,13 @@
 		<td colspan="3"></td>
 		<td>Total</td>
 		<td><%= @order.total %></td>
-	</tr> 
+	</tr>
+  <tr>
+    <%= form_for(@order, method: :patch) do |f| %>
+      Shipping To: 
+      <%= f.select :address, options_for_select(@addresses.collect{|a| [a.line1, a.id]}) %>
+    <% end %>
+  </tr> 
 </table>
 <br />
 <%= link_to "Empty Cart", order_path(@order), class: 'btn btn-primary', method: :delete %>
