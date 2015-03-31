@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
       session[:order_id] = @order.id
     end
   end
+
+  protected
+  def log_in_user
+    redirect_to login_path unless current_user
+  end
 end

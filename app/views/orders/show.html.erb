@@ -39,11 +39,12 @@
 		<td><%= @order.total %></td>
 	</tr>
   <tr>
-    <%= form_for(@order, method: :patch) do |f| %>
+    <%= form_for(@order) do |f| %>
       Shipping To: 
-      <%= f.select :address, options_for_select(@addresses.collect{|a| [a.line1, a.id]}) %>
+      <%= f.select :address, options_for_select(current_user.addresses.collect{|a| [a.line1, a.id]}) %>
     <% end %>
   </tr> 
+  &nbsp;<%= link_to "Add New Address", new_address_path, class: "btn btn-primary" %>
 </table>
 <br />
 <%= link_to "Empty Cart", order_path(@order), class: 'btn btn-primary', method: :delete %>

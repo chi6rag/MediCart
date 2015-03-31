@@ -1,5 +1,7 @@
+include ApplicationHelper
 class AddressesController < ApplicationController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
+  before_action :log_in_user, only: [:new, :create]
 
   # GET /addresses
   # GET /addresses.json
@@ -15,6 +17,7 @@ class AddressesController < ApplicationController
   # GET /addresses/new
   def new
     @address = Address.new
+    @address.user_id = current_user.id
   end
 
   # GET /addresses/1/edit
@@ -25,10 +28,12 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = Address.new(address_params)
+    @address.user_id = current_user.id
+    order = Order.find_by(id: session[:order_id])
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
+        format.html { redirect_to order, notice: 'Address was successfully created.' }
         format.json { render :show, status: :created, location: @address }
       else
         format.html { render :new }
