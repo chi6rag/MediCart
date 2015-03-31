@@ -41,7 +41,8 @@
   <tr>
     <%= form_for(@order) do |f| %>
       Shipping To: 
-      <%= f.select :address, options_for_select(current_user.addresses.collect{|a| [a.line1, a.id]}) %>
+      <%= f.select :address_id, options_for_select(current_user.addresses.collect{|a| [a.line1, a.id]}) %>
+      <%= f.submit "Checkout" %>
     <% end %>
   </tr> 
   &nbsp;<%= link_to "Add New Address", new_address_path, class: "btn btn-primary" %>
